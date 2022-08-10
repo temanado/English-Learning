@@ -9,6 +9,7 @@ namespace English_Learning.Services
     public class MockDataStore : IDataStore<Item>
     {
         readonly List<Item> items;
+        readonly List<string> languages;
 
         public MockDataStore()
         {
@@ -20,6 +21,11 @@ namespace English_Learning.Services
                 new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
                 new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
                 new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+            };
+            languages = new List<string>()
+            {
+                "Русский",
+                "English"
             };
         }
 
@@ -55,6 +61,11 @@ namespace English_Learning.Services
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
+        }
+
+        public async Task<IEnumerable<string>> GetLanguagesAsync(bool forceRefresh = false)
+        {
+            return await Task.FromResult(languages);
         }
     }
 }

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="English_Learning.Views.LanguagePage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:English_Learning.ViewModels"  
+             xmlns:model="clr-namespace:English_Learning.Models"
+             x:Name="BrowseLanguagePage">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Fill" VerticalOptions="CenterAndExpand">
+            <Picker Title="Select Language (Default: English)" x:Name="LanguagesListView" x:DataType="local:LanguageViewModel" ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" />
+            <Button Text="Done" Command="{Binding SetLanguageCommand}" HorizontalOptions="CenterAndExpand"/>
+        </StackLayout>
+        
+        
+        <!--<StackLayout>
+            <Picker Title="Select Language" ItemsSource="{Binding LanguageList}" SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}" 
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" >
+            </Picker>
+
+        </StackLayout>-->
+    </ContentPage.Content>
+</ContentPage>

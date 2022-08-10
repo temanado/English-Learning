@@ -3,7 +3,8 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:English_Learning.Views"
        Title="English_Learning"
-       x:Class="English_Learning.AppShell">
+       x:Class="English_Learning.AppShell"
+       >
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -28,19 +29,26 @@
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
-
+    
+    
+    
     <TabBar>
-        <ShellContent Title="About" Icon="icon_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
-        <ShellContent Title="Browse" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="Home" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:HomePage}" />
+        <ShellContent Title="Add word" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:NewItemPage}" />
+        <ShellContent Title="Archive" Icon="icon_dictionary.png" ContentTemplate="{DataTemplate local:ArchivePage}" />
+        <ShellContent Title="Settings" Icon="icon_config.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </TabBar>
 
+    <TabBar >
+        <ShellContent Title="Select Language" Route="LanguagePage" ContentTemplate="{DataTemplate local:LanguagePage}" />
+    </TabBar>
     <!--
         If you would like to navigate to this content you can do so by calling
         await Shell.Current.GoToAsync("//LoginPage");
     -->
-    <TabBar>
+    <!--<TabBar IsVisible="False">
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
-    </TabBar>
+    </TabBar>-->
 
 
 </Shell>
