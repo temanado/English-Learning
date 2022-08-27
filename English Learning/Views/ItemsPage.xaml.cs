@@ -18,15 +18,15 @@ namespace English_Learning.Views
 
         public ItemsPage()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel();
+            //BindingContext = _viewModel = new ItemsViewModel();
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            _viewModel.OnAppearing();
-        }
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    _viewModel.OnAppearing();
+        //}
     }
 }

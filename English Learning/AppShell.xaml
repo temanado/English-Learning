@@ -35,8 +35,8 @@
     <TabBar>
         <ShellContent Title="Home" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:HomePage}" />
         <ShellContent Title="Add word" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:NewItemPage}" />
-        <ShellContent Title="Archive" Icon="icon_dictionary.png" ContentTemplate="{DataTemplate local:ArchivePage}" />
-        <ShellContent Title="Settings" Icon="icon_config.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <!--<ShellContent Title="Archive" Icon="icon_dictionary.png" ContentTemplate="{DataTemplate local:ArchivePage}" />-->
+        <ShellContent Title="Settings" Icon="icon_config.png" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </TabBar>
 
     <TabBar >

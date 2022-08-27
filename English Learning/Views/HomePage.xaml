@@ -1,20 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="English_Learning.Views.HomePage">
-  <ListView x:Name="MyListView"
+             x:Class="English_Learning.Views.HomePage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:English_Learning.ViewModels"  
+             xmlns:model="clr-namespace:English_Learning.Models"  
+             x:Name="BrowseHomePage">
+    <RefreshView x:DataType="local:HomePageViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView x:Name="WordsListView"
+                ItemsSource="{Binding Words}"
+                SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10" x:DataType="model:Word">
+                        <Label Text="{Binding ForeignWord}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="16" />
+                        <Label Text="{Binding Translation}" 
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:HomePageViewModel}}, Path=WordTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
+    
+    <!--<ListView x:Name="MyListView"
             ItemsSource="{Binding Items}"
             ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement">
-    <!--Built in Cells-->
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding .}" />
-        </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    <!--Custom View Cells-->
-    <!--
+        Built in Cells
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding ForeignWord}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+        Custom View Cells
+        
     <ListView.ItemTemplate>
       <DataTemplate>
         <ViewCell>
@@ -27,6 +59,6 @@
         </ViewCell>
       </DataTemplate>
     </ListView.ItemTemplate>
-    -->
-  </ListView>
+    
+    </ListView>-->
 </ContentPage>

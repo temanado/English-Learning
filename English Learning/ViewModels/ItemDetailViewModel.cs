@@ -6,47 +6,90 @@ using Xamarin.Forms;
 
 namespace English_Learning.ViewModels
 {
-    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    [QueryProperty(nameof(wordId), nameof(wordId))]
     public class ItemDetailViewModel : BaseViewModel
     {
-        private string itemId;
-        private string text;
-        private string description;
+        private string wordId;
+        private string foreignWord;
+        private string translation;
+        private bool studyMothod;
+        private DateTime dateOfInsertion;
+        private int methodLevel;
+        private DateTime lastViewed;
+        private DateTime nextViewing;
+        private bool isArchived;
+
         public string Id { get; set; }
 
-        public string Text
+        public string ForeignWord
         {
-            get => text;
-            set => SetProperty(ref text, value);
+            get => foreignWord;
+            set => SetProperty(ref foreignWord, value);
+        }
+        public string Translation
+        {
+            get => translation;
+            set => SetProperty(ref translation, value);
+        }
+        public bool StudyMothod
+        {
+            get => studyMothod;
+            set => SetProperty(ref studyMothod, value);
+        }
+        public DateTime DateOfInsertion
+        {
+            get => dateOfInsertion;
+            set => SetProperty(ref dateOfInsertion, value);
+        }
+        public int MethodLevel
+        {
+            get => methodLevel;
+            set => SetProperty(ref methodLevel, value);
+        }
+        public DateTime LastViewed
+        {
+            get => lastViewed;
+            set => SetProperty(ref lastViewed, value);
+        }
+        public DateTime NextViewing
+        {
+            get => nextViewing;
+            set => SetProperty(ref nextViewing, value);
+        }
+        public bool IsArchived
+        {
+            get => isArchived;
+            set => SetProperty(ref isArchived, value);
         }
 
-        public string Description
-        {
-            get => description;
-            set => SetProperty(ref description, value);
-        }
-
-        public string ItemId
+        public string WordId
         {
             get
             {
-                return itemId;
+                return wordId;
             }
             set
             {
-                itemId = value;
-                LoadItemId(value);
+                wordId = value;
+                LoadwordId(value);
             }
         }
 
-        public async void LoadItemId(string itemId)
+
+        public async void LoadwordId(string wordId)
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
+                var item = await DataStore.GetWordAsync(wordId);
                 Id = item.Id;
-                Text = item.Text;
-                Description = item.Description;
+                ForeignWord = item.ForeignWord;
+                Translation = item.Translation;
+                StudyMothod = item.StudyMothod;
+                DateOfInsertion = item.DateOfInsertion;
+                MethodLevel = item.MethodLevel;
+                LastViewed = item.LastViewed;
+                NextViewing = item.NextViewing;
+                IsArchived = item.IsArchived;
             }
             catch (Exception)
             {

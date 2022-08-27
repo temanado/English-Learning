@@ -4,6 +4,7 @@ namespace English_Learning.Models
 {
     public class Word
     {
+        public string Id { get; set; }
         public string ForeignWord { get; set; }
         public string Translation {  get; set; }
         public bool StudyMothod { get; set; }
@@ -12,6 +13,5 @@ namespace English_Learning.Models
         public DateTime LastViewed { get; set; }
         public DateTime NextViewing{ get; set; }
         public bool IsArchived { get; set; }
-
     }
 }

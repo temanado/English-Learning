@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\DataService.cs" />
     <Compile Remove="Views\ItemsPage - Копировать.xaml.cs" />
   </ItemGroup>
 

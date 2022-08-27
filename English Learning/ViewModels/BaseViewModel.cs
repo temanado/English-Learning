@@ -4,13 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace English_Learning.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged, IDialogService
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<Word> DataStore => DependencyService.Get<IDataStore<Word>>();
+        public IDialogService DialogService => DependencyService.Get<IDialogService>();
 
         bool isBusy = false;
         public bool IsBusy
@@ -48,6 +50,11 @@ namespace English_Learning.ViewModels
                 return;
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public Task ShowAlertAsync(string message, string title, string buttonLabel)
+        {
+            return DialogService.ShowAlertAsync(message, title, buttonLabel);
         }
         #endregion
     }

@@ -12,7 +12,7 @@ namespace English_Learning
         public App()
         {
             InitializeComponent();
-
+            DependencyService.Register<DialogService>();//верно?
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }

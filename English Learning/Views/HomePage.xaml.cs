@@ -1,4 +1,5 @@
-﻿using System;
+﻿using English_Learning.ViewModels;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -12,22 +13,13 @@ namespace English_Learning.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        public ObservableCollection<string> Items { get; set; }
+        HomePageViewModel _viewModel;
 
         public HomePage()
         {
             InitializeComponent();
 
-            Items = new ObservableCollection<string>
-            {
-                "Item 1",
-                "Item 2",
-                "Item 3",
-                "Item 4",
-                "Item 5"
-            };
-
-            MyListView.ItemsSource = Items;
+            BindingContext = _viewModel = new HomePageViewModel();
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -39,6 +31,13 @@ namespace English_Learning.Views
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
+        }
+
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _viewModel.OnAppearing();
         }
     }
 }

@@ -3,20 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="English_Learning.Views.NewItemPage"
              Shell.PresentationMode="ModalAnimated"
-             Title="New Item"
+             Title="New Word"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true">
     <ContentPage.Content>
-        <StackLayout Spacing="3" Padding="15">
-            <Label Text="Text" FontSize="Medium" />
-            <Entry Text="{Binding Text, Mode=TwoWay}" FontSize="Medium" />
-            <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding Description, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+        <ScrollView>
+            <StackLayout Spacing="3" Padding="15">
+                <Label Text="Word" FontSize="Medium" />
+                <Entry Text="{Binding ForeignWord, Mode=TwoWay}" FontSize="Medium" />
+                <Label Text="Translate" FontSize="Medium" />
+                <Entry Text="{Binding Translation, Mode=TwoWay}" FontSize="Medium" />
+                <Label Text="Method" FontSize="Medium" />
+                <Picker>
+                    <Picker.Items>
+                        <x:String>The Leitner System</x:String>
+                        <x:String>The Pimsleur Method</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Button Text="About methods" Command="{Binding AboutMethodsCommand}"/>
+                <Label Text="Information Button With Pop Up -DisplayAlert-" FontSize="Medium" />
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Clear" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
     
 </ContentPage>

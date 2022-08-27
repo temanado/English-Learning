@@ -1,4 +1,5 @@
 ﻿using English_Learning.Models;
+using English_Learning.Services;
 using English_Learning.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace English_Learning.Views
         public NewItemPage()
         {
             InitializeComponent();
-            BindingContext = new NewItemViewModel();
+            BindingContext = new NewItemViewModel(new DialogService());//верно?
         }
     }
 }
