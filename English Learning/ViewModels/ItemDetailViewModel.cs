@@ -1,6 +1,8 @@
 ﻿using English_Learning.Models;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,12 +14,14 @@ namespace English_Learning.ViewModels
         private string wordId;
         private string foreignWord;
         private string translation;
-        private StudyMethods studyMothod;
+        private StudyMethods studyMethod;
         private DateTime dateOfInsertion;
         private int level;
         private DateTime lastViewed;
         private DateTime nextViewing;
         private bool isArchived;
+        private string selectedMethod;
+
         public string Id { get; set; }
         public string ForeignWord
         {
@@ -29,10 +33,10 @@ namespace English_Learning.ViewModels
             get => translation;
             set => SetProperty(ref translation, value);
         }
-        public StudyMethods StudyMothod
+        public StudyMethods StudyMethod
         {
-            get => studyMothod;
-            set => SetProperty(ref studyMothod, value);
+            get => studyMethod;
+            set => SetProperty(ref studyMethod, value);
         }
         public DateTime DateOfInsertion
         {
@@ -72,16 +76,37 @@ namespace English_Learning.ViewModels
             }
         }
 
+        private Word OldWord { get; set; }
+
+
+
+        public Command DeleteCommand { get; }
+        public Command UpdateCommand { get; }
+        public Command AboutMethodsCommand { get; }
+
+        public ItemDetailViewModel()
+        {
+            DeleteCommand = new Command(Delete, IsNotClear);
+            //ArchiveCommand = new Command(Archive);
+            UpdateCommand = new Command(Update, ValidateSave);
+            this.PropertyChanged +=
+                (_, __) => DeleteCommand.ChangeCanExecute();
+            this.PropertyChanged +=
+                (_, __) => UpdateCommand.ChangeCanExecute();
+        }
 
         public async void LoadWordId(string wordId)
         {
             try
             {
-                var word = await DataStore.GetWordAsync(wordId);
+                var word = await WordDataStore.GetItemAsync(wordId);
+                OldWord = word;
+
                 Id = word.Id;
                 ForeignWord = word.ForeignWord;
                 Translation = word.Translation;
-                StudyMothod = word.StudyMethod;
+                StudyMethod = word.StudyMethod;
+                SelectedMethod = GetMethodName(word.StudyMethod);
                 DateOfInsertion = word.DateOfInsertion;
                 Level = word.Level;
                 LastViewed = word.LastViewed;
@@ -93,5 +118,100 @@ namespace English_Learning.ViewModels
                 Debug.WriteLine("Failed to Load Item");
             }
         }
+
+
+        public List<string> MethodNames
+        {
+            get
+            {
+                return new List<string>() { "The Pimsler's method", "The Leitner's method" };
+            }
+        }
+        public string SelectedMethod
+        {
+            get
+            {
+                return selectedMethod;
+            }
+            set
+            {
+                SetProperty(ref selectedMethod, value);
+
+                StudyMethod = GetMethod(value);
+
+            }
+        }
+
+
+        private string GetMethodName(StudyMethods studyMethod)
+        {
+            switch (studyMethod)
+            {
+                case StudyMethods.Pimsler:
+                    return MethodNames[0];
+                case StudyMethods.Leitner:
+                    return MethodNames[1];
+                default:
+                    return "";
+            }
+        }
+        private StudyMethods GetMethod(string methodName)
+        {
+            if (methodName == "")
+                methodName = (string)(ParametersDataStore.GetItemAsync("DefaultStudyMethod").Result).Value;
+
+            if (methodName == MethodNames[1])
+                return StudyMethods.Leitner;
+
+            return StudyMethods.Pimsler;
+        }
+
+
+        private bool IsNotClear()
+        {
+            return !String.IsNullOrWhiteSpace(Id);
+        }
+        private async void Delete()
+        {
+            await WordDataStore.DeleteItemAsync(Id);
+
+            // This will pop the current page off the navigation stack
+            await Shell.Current.GoToAsync("..");
+        }
+        private bool ValidateSave()
+        {
+            //условия: не одинаковые значения и заполненность
+            return !String.IsNullOrWhiteSpace(ForeignWord)
+                && !String.IsNullOrWhiteSpace(Translation)
+                &&
+                    (
+                       !ForeignWord.Equals(OldWord.ForeignWord)
+                    || !Translation.Equals(OldWord.Translation)
+                    || !StudyMethod.Equals(OldWord.StudyMethod)
+                    );
+        }
+        private async void Update()
+        {
+            Word newWord = new Word()
+            {
+                Id = WordId,
+                ForeignWord = ForeignWord,
+                Translation = Translation,
+                StudyMethod = StudyMethod,
+                DateOfInsertion = DateOfInsertion,
+                Level = Level,
+                LastViewed = LastViewed,
+                NextViewing = NextViewing,
+                IsArchived = IsArchived
+            };
+
+            await WordDataStore.UpdateItemAsync(newWord);
+
+            // This will pop the current page off the navigation stack
+            await Shell.Current.GoToAsync("..");
+        }
     }
 }
+
+
+

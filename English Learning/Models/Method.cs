@@ -62,7 +62,7 @@ namespace English_Learning.Models
             else
                 period = periods[level];
 
-            return startDateTime - period;
+            return startDateTime + period;
         }
 
     }

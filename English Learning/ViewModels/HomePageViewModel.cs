@@ -37,7 +37,7 @@ namespace English_Learning.ViewModels
             try
             {
                 Words.Clear();
-                var words = await DataStore.GetWordsAsync(true);
+                var words = await WordDataStore.GetItemsAsync(true);
                 foreach (var word in words)
                 {
                     Words.Add(word);

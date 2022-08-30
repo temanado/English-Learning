@@ -45,10 +45,10 @@ namespace English_Learning.ViewModels
             try
             {
                 Languages.Clear();
-                var langs = await DataStore.GetLanguagesAsync(true);
+                var langs = await ParametersDataStore.GetItemsAsync(true);
                 foreach (var lang in langs)
                 {
-                    Languages.Add(lang);
+                    Languages.Add(lang.Name);
                 }
             }
             catch (Exception ex)
@@ -71,7 +71,7 @@ namespace English_Learning.ViewModels
         {
             //Логика локализации
             //Переход на домашнюю страницу
-            Shell.Current.GoToAsync("HomePage");
+            await Shell.Current.GoToAsync("HomePage");
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using English_Learning.Models;
 using English_Learning.Services;
+using English_Learning.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -127,10 +128,10 @@ namespace English_Learning.ViewModels
                 IsArchived = IsArchived
             };
 
-            await DataStore.AddWordAsync(newItem);
+            await WordDataStore.AddItemAsync(newItem);
 
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+            //null ref
+            await Shell.Current.GoToAsync($"{nameof(HomePage)}");
         }
     }
 }
