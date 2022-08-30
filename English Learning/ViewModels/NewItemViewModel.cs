@@ -13,9 +13,9 @@ namespace English_Learning.ViewModels
     {
         private string foreignWord;
         private string translation;
-        private bool studyMothod;
+        private StudyMethods studyMethod;
         private DateTime dateOfInsertion;
-        private int methodLevel;
+        private int level;
         private DateTime lastViewed;
         private DateTime nextViewing;
         private bool isArchived;
@@ -32,20 +32,20 @@ namespace English_Learning.ViewModels
             get => translation;
             set => SetProperty(ref translation, value);
         }
-        public bool StudyMothod
+        public StudyMethods StudyMethod
         {
-            get => studyMothod;
-            set => SetProperty(ref studyMothod, value);
+            get => studyMethod;
+            set => SetProperty(ref studyMethod, value);
         }
         public DateTime DateOfInsertion
         {
             get => dateOfInsertion;
             set => SetProperty(ref dateOfInsertion, value);
         }
-        public int MethodLevel
+        public int Level
         {
-            get => methodLevel;
-            set => SetProperty(ref methodLevel, value);
+            get => level;
+            set => SetProperty(ref level, value);
         }
         public DateTime LastViewed
         {
@@ -119,9 +119,9 @@ namespace English_Learning.ViewModels
                 Id = Guid.NewGuid().ToString(),
                 ForeignWord = ForeignWord,
                 Translation = Translation,
-                StudyMothod = StudyMothod,
+                StudyMethod = StudyMethod,
                 DateOfInsertion = DateOfInsertion,
-                MethodLevel = MethodLevel,
+                Level = Level,
                 LastViewed = LastViewed,
                 NextViewing = NextViewing,
                 IsArchived = IsArchived

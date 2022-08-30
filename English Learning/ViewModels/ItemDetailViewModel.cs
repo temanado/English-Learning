@@ -6,21 +6,19 @@ using Xamarin.Forms;
 
 namespace English_Learning.ViewModels
 {
-    [QueryProperty(nameof(wordId), nameof(wordId))]
+    [QueryProperty(nameof(WordId), nameof(WordId))]
     public class ItemDetailViewModel : BaseViewModel
     {
         private string wordId;
         private string foreignWord;
         private string translation;
-        private bool studyMothod;
+        private StudyMethods studyMothod;
         private DateTime dateOfInsertion;
-        private int methodLevel;
+        private int level;
         private DateTime lastViewed;
         private DateTime nextViewing;
         private bool isArchived;
-
         public string Id { get; set; }
-
         public string ForeignWord
         {
             get => foreignWord;
@@ -31,7 +29,7 @@ namespace English_Learning.ViewModels
             get => translation;
             set => SetProperty(ref translation, value);
         }
-        public bool StudyMothod
+        public StudyMethods StudyMothod
         {
             get => studyMothod;
             set => SetProperty(ref studyMothod, value);
@@ -41,10 +39,10 @@ namespace English_Learning.ViewModels
             get => dateOfInsertion;
             set => SetProperty(ref dateOfInsertion, value);
         }
-        public int MethodLevel
+        public int Level
         {
-            get => methodLevel;
-            set => SetProperty(ref methodLevel, value);
+            get => level;
+            set => SetProperty(ref level, value);
         }
         public DateTime LastViewed
         {
@@ -61,7 +59,6 @@ namespace English_Learning.ViewModels
             get => isArchived;
             set => SetProperty(ref isArchived, value);
         }
-
         public string WordId
         {
             get
@@ -71,25 +68,25 @@ namespace English_Learning.ViewModels
             set
             {
                 wordId = value;
-                LoadwordId(value);
+                LoadWordId(value);
             }
         }
 
 
-        public async void LoadwordId(string wordId)
+        public async void LoadWordId(string wordId)
         {
             try
             {
-                var item = await DataStore.GetWordAsync(wordId);
-                Id = item.Id;
-                ForeignWord = item.ForeignWord;
-                Translation = item.Translation;
-                StudyMothod = item.StudyMothod;
-                DateOfInsertion = item.DateOfInsertion;
-                MethodLevel = item.MethodLevel;
-                LastViewed = item.LastViewed;
-                NextViewing = item.NextViewing;
-                IsArchived = item.IsArchived;
+                var word = await DataStore.GetWordAsync(wordId);
+                Id = word.Id;
+                ForeignWord = word.ForeignWord;
+                Translation = word.Translation;
+                StudyMothod = word.StudyMethod;
+                DateOfInsertion = word.DateOfInsertion;
+                Level = word.Level;
+                LastViewed = word.LastViewed;
+                NextViewing = word.NextViewing;
+                IsArchived = word.IsArchived;
             }
             catch (Exception)
             {
