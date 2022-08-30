@@ -66,6 +66,11 @@ namespace English_Learning.ViewModels
 
         private readonly IDialogService _dialogService;
 
+
+        public Command SaveCommand { get; }
+        public Command CancelCommand { get; }
+        public Command AboutMethodsCommand { get; }
+
         public NewItemViewModel(IDialogService dialogService)
         {
             _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
@@ -78,11 +83,6 @@ namespace English_Learning.ViewModels
                 (_, __) => CancelCommand.ChangeCanExecute();
             AboutMethodsCommand = new Command(async () => await AboutMethodsPopUp());
         }
-
-
-        public Command SaveCommand { get; }
-        public Command CancelCommand { get; }
-        public Command AboutMethodsCommand { get; }
 
 
         private async Task AboutMethodsPopUp()

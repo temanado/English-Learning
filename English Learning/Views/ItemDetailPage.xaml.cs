@@ -1,4 +1,5 @@
-﻿using English_Learning.ViewModels;
+﻿using English_Learning.Services;
+using English_Learning.ViewModels;
 using System.ComponentModel;
 using Xamarin.Forms;
 
@@ -9,7 +10,7 @@ namespace English_Learning.Views
         public ItemDetailPage()
         {
             InitializeComponent();
-            BindingContext = new ItemDetailViewModel();
+            BindingContext = new ItemDetailViewModel(new DialogService());//верно?
         }
     }
 }

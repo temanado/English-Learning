@@ -1,4 +1,5 @@
 ﻿using English_Learning.Models;
+using English_Learning.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,6 +22,9 @@ namespace English_Learning.ViewModels
         private DateTime nextViewing;
         private bool isArchived;
         private string selectedMethod;
+        private bool translationIsVisible;
+
+        private Word OldWord { get; set; }
 
         public string Id { get; set; }
         public string ForeignWord
@@ -76,23 +80,42 @@ namespace English_Learning.ViewModels
             }
         }
 
-        private Word OldWord { get; set; }
+        public bool TranslationIsVisible
+        {
+            get { return translationIsVisible; }
+            set { SetProperty(ref translationIsVisible, value); }
+        }
 
-
+        private readonly IDialogService _dialogService;
 
         public Command DeleteCommand { get; }
         public Command UpdateCommand { get; }
         public Command AboutMethodsCommand { get; }
+        public Command GetTranslationCommand { get; }
 
-        public ItemDetailViewModel()
+        public ItemDetailViewModel(IDialogService dialogService)
         {
+            _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
             DeleteCommand = new Command(Delete, IsNotClear);
-            //ArchiveCommand = new Command(Archive);
             UpdateCommand = new Command(Update, ValidateSave);
+            GetTranslationCommand = new Command(async () => await GetTranslation());
+            AboutMethodsCommand = new Command(async () => await AboutMethodsPopUp());
             this.PropertyChanged +=
                 (_, __) => DeleteCommand.ChangeCanExecute();
             this.PropertyChanged +=
                 (_, __) => UpdateCommand.ChangeCanExecute();
+        }
+
+        private async Task GetTranslation()
+        {
+            TranslationIsVisible = !TranslationIsVisible;
+        }
+
+        private async Task AboutMethodsPopUp()
+        {
+            await _dialogService.ShowAlertAsync("About methods", "The title of the alert", "Back");
+
         }
 
         public async void LoadWordId(string wordId)
@@ -118,8 +141,6 @@ namespace English_Learning.ViewModels
                 Debug.WriteLine("Failed to Load Item");
             }
         }
-
-
         public List<string> MethodNames
         {
             get
@@ -141,7 +162,6 @@ namespace English_Learning.ViewModels
 
             }
         }
-
 
         private string GetMethodName(StudyMethods studyMethod)
         {

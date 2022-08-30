@@ -18,7 +18,8 @@ namespace English_Learning.Services
                 new Parameter { Id = "Notification", Name = "Notification Type", Value = "Push", Type = Type.GetType("Sistem.String") },
                 new Parameter { Id = "AppActivityStartDate", Name = "App Activity Start Date", Value = DateTime.MinValue, Type = Type.GetType("System.DateTime") },
                 new Parameter { Id = "AppActivityEndDate", Name = "App Activity End Date", Value = DateTime.MaxValue, Type = Type.GetType("System.DateTime") },
-                new Parameter { Id = "AppLanguage", Name = "Language", Value = new CultureInfo("en-US"), Type = Type.GetType("System.Globalization.CultureInfo") }
+                new Parameter { Id = "AppLanguage", Name = "Language", Value = new CultureInfo("en-US"), Type = Type.GetType("System.Globalization.CultureInfo") },
+                new Parameter { Id = "TranslationIsVisible", Name = "Translation Is Visible", Value = false, Type = Type.GetType("System.Boolean") }
             };
         }
         public async Task<bool> AddItemAsync(Parameter parameter)
