@@ -129,6 +129,9 @@ namespace English_Learning.ViewModels
             };
 
             await WordDataStore.AddItemAsync(newItem);
+            Clear(newItem);
+            await Shell.Current.Navigation.PopToRootAsync();
+
 
             //null ref
             await Shell.Current.GoToAsync($"{nameof(HomePage)}");

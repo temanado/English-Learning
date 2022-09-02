@@ -1,4 +1,5 @@
 ﻿using English_Learning.Models;
+using English_Learning.RESX;
 using English_Learning.Services;
 using System;
 using System.Collections.Generic;
@@ -99,7 +100,7 @@ namespace English_Learning.ViewModels
 
             DeleteCommand = new Command(Delete, IsNotClear);
             UpdateCommand = new Command(Update, ValidateSave);
-            GetTranslationCommand = new Command(async () => await GetTranslation());
+            GetTranslationCommand = new Command( () =>  GetTranslation());
             AboutMethodsCommand = new Command(async () => await AboutMethodsPopUp());
             this.PropertyChanged +=
                 (_, __) => DeleteCommand.ChangeCanExecute();
@@ -107,14 +108,14 @@ namespace English_Learning.ViewModels
                 (_, __) => UpdateCommand.ChangeCanExecute();
         }
 
-        private async Task GetTranslation()
+        private void GetTranslation()
         {
             TranslationIsVisible = !TranslationIsVisible;
         }
 
         private async Task AboutMethodsPopUp()
         {
-            await _dialogService.ShowAlertAsync("About methods", "The title of the alert", "Back");
+            await _dialogService.ShowAlertAsync(AppResources.DetailAboutMethodDescription, AppResources.DetailAboutMethodsTitle, AppResources.DetailAboutMethodsBackButton);
 
         }
 
@@ -226,6 +227,7 @@ namespace English_Learning.ViewModels
             };
 
             await WordDataStore.UpdateItemAsync(newWord);
+
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

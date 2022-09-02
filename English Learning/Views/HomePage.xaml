@@ -2,17 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="English_Learning.Views.HomePage"
-             Title="{Binding Title}"
+             xmlns:resources="clr-namespace:English_Learning.RESX"
+             Title="{x:Static resources:AppResources.HomePageTitile}"
              xmlns:local="clr-namespace:English_Learning.ViewModels"  
              xmlns:model="clr-namespace:English_Learning.Models"  
              x:Name="BrowseHomePage">
-    <RefreshView x:DataType="local:HomePageViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+    <RefreshView x:Name="refreshView" x:DataType="local:HomePageViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="WordsListView"
                 ItemsSource="{Binding Words}"
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Word">
+                    <StackLayout x:Name="stackLayout" Padding="10" x:DataType="model:Word">
                         <Label Text="{Binding ForeignWord}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 

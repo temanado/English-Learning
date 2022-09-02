@@ -1,4 +1,5 @@
-﻿using English_Learning.ViewModels;
+﻿using English_Learning.Services;
+using English_Learning.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,12 +14,11 @@ namespace English_Learning.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        HomePageViewModel _viewModel;
+        HomePageViewModel _viewModel; 
 
         public HomePage()
         {
             InitializeComponent();
-
             BindingContext = _viewModel = new HomePageViewModel();
         }
 
@@ -32,7 +32,6 @@ namespace English_Learning.Views
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
         }
-
 
         protected override void OnAppearing()
         {

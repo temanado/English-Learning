@@ -14,14 +14,14 @@ namespace English_Learning.Views
 {
     public partial class ItemsPage : ContentPage
     {
-        ItemsViewModel _viewModel;
+        //ItemsViewModel _viewModel;
 
-        public ItemsPage()
-        {
-            //InitializeComponent();
+        //public ItemsPage()
+        //{
+        //    InitializeComponent();
 
-            //BindingContext = _viewModel = new ItemsViewModel();
-        }
+        //    BindingContext = _viewModel = new ItemsViewModel();
+        //}
 
         //protected override void OnAppearing()
         //{
