@@ -12,7 +12,6 @@ namespace English_Learning.ViewModels
     public class BaseViewModel : INotifyPropertyChanged, IDialogService
     {
         public IDataStore<Word> WordDataStore => DependencyService.Get<IDataStore<Word>>();
-        public IDataStore<Parameter> ParametersDataStore => DependencyService.Get<IDataStore<Parameter>>();
         public IDialogService DialogService => DependencyService.Get<IDialogService>();
 
         bool isBusy = false;

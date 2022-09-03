@@ -17,6 +17,7 @@ namespace English_Learning
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));//NewItemPage
             Routing.RegisterRoute(nameof(ArchivePage), typeof(ArchivePage));//ArchivePage
             Routing.RegisterRoute(nameof(ItemsPage), typeof(ItemsPage));//ItemsPage
+            Routing.RegisterRoute(nameof(PreferencesPage), typeof(PreferencesPage));//ItemsPage
         }
 
     }

@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AppActivityEnd" xml:space="preserve">
+    <value>App Activity End Time</value>
+  </data>
+  <data name="AppActivityStart" xml:space="preserve">
+    <value>App Activity Start Time</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="DetailAboutMethodDescription" xml:space="preserve">
     <value>Pimsleur recommended repeating words 11 times. His conclusions are that repetitions are needed after 30 minutes, in the morning of the next day; after three days; later: a week, a month, three months, six months and a year. Frequent encounters with unfamiliar phrases in English are necessary to create and strengthen new neural connections.
 
@@ -154,5 +163,26 @@ Leitner method. Words are divided into groups with repetition intervals and repe
   </data>
   <data name="HomePageTitile" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="LeitnerMethodDescription" xml:space="preserve">
+    <value>&lt;Description&gt;</value>
+  </data>
+  <data name="LeitnerMethodTitle" xml:space="preserve">
+    <value>The Leitner's Method</value>
+  </data>
+  <data name="PimslerMethodDescription" xml:space="preserve">
+    <value>&lt;Description&gt;</value>
+  </data>
+  <data name="PimslerMethodTitle" xml:space="preserve">
+    <value>The Pimsleur's Method</value>
+  </data>
+  <data name="PreferencesNotification" xml:space="preserve">
+    <value>Only Push</value>
+  </data>
+  <data name="WelcomeButton" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="WelcomeText" xml:space="preserve">
+    <value>Welcome! The first time you start, you need to configure the application.</value>
   </data>
 </root>

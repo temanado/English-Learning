@@ -29,18 +29,13 @@
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
-    
-    
-    
-    <TabBar>
+
+
+
+    <TabBar CurrentItem="{x:Reference preferencesPage}">
         <ShellContent Title="Home" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:HomePage}" />
         <ShellContent Title="Add word" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:NewItemPage}" />
-        <!--<ShellContent Title="Archive" Icon="icon_dictionary.png" ContentTemplate="{DataTemplate local:ArchivePage}" />-->
-        <ShellContent Title="Settings" Icon="icon_config.png" ContentTemplate="{DataTemplate local:SettingsPage}" />
-    </TabBar>
-
-    <TabBar >
-        <ShellContent Title="Select Language" Route="LanguagePage" ContentTemplate="{DataTemplate local:LanguagePage}" />
+        <ShellContent x:Name="preferencesPage" Title="Settings" Icon="icon_config.png" ContentTemplate="{DataTemplate local:PreferencesPage}" Shell.TabBarIsVisible="False"/>
     </TabBar>
     <!--
         If you would like to navigate to this content you can do so by calling

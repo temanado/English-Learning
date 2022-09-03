@@ -16,7 +16,7 @@ namespace English_Learning.ViewModels
         private string wordId;
         private string foreignWord;
         private string translation;
-        private StudyMethods studyMethod;
+        private StudyMethodsEnum studyMethod;
         private DateTime dateOfInsertion;
         private int level;
         private DateTime lastViewed;
@@ -38,7 +38,7 @@ namespace English_Learning.ViewModels
             get => translation;
             set => SetProperty(ref translation, value);
         }
-        public StudyMethods StudyMethod
+        public StudyMethodsEnum StudyMethod
         {
             get => studyMethod;
             set => SetProperty(ref studyMethod, value);
@@ -129,8 +129,8 @@ namespace English_Learning.ViewModels
                 Id = word.Id;
                 ForeignWord = word.ForeignWord;
                 Translation = word.Translation;
-                StudyMethod = word.StudyMethod;
-                SelectedMethod = GetMethodName(word.StudyMethod);
+                StudyMethod = word.StudyMethodEnum;
+                SelectedMethod = StudyMethods.GetMethodNameFormEnum(word.StudyMethodEnum);
                 DateOfInsertion = word.DateOfInsertion;
                 Level = word.Level;
                 LastViewed = word.LastViewed;
@@ -146,7 +146,7 @@ namespace English_Learning.ViewModels
         {
             get
             {
-                return new List<string>() { "The Pimsler's method", "The Leitner's method" };
+                return StudyMethods.GetMethodNames();
             }
         }
         public string SelectedMethod
@@ -159,35 +159,10 @@ namespace English_Learning.ViewModels
             {
                 SetProperty(ref selectedMethod, value);
 
-                StudyMethod = GetMethod(value);
+                StudyMethod = StudyMethods.GetMethodEnumFromString(value);
 
             }
         }
-
-        private string GetMethodName(StudyMethods studyMethod)
-        {
-            switch (studyMethod)
-            {
-                case StudyMethods.Pimsler:
-                    return MethodNames[0];
-                case StudyMethods.Leitner:
-                    return MethodNames[1];
-                default:
-                    return "";
-            }
-        }
-        private StudyMethods GetMethod(string methodName)
-        {
-            if (methodName == "")
-                methodName = (string)(ParametersDataStore.GetItemAsync("DefaultStudyMethod").Result).Value;
-
-            if (methodName == MethodNames[1])
-                return StudyMethods.Leitner;
-
-            return StudyMethods.Pimsler;
-        }
-
-
         private bool IsNotClear()
         {
             return !String.IsNullOrWhiteSpace(Id);
@@ -208,7 +183,7 @@ namespace English_Learning.ViewModels
                     (
                        !ForeignWord.Equals(OldWord.ForeignWord)
                     || !Translation.Equals(OldWord.Translation)
-                    || !StudyMethod.Equals(OldWord.StudyMethod)
+                    || !StudyMethod.Equals(OldWord.StudyMethodEnum)
                     );
         }
         private async void Update()
@@ -218,11 +193,10 @@ namespace English_Learning.ViewModels
                 Id = WordId,
                 ForeignWord = ForeignWord,
                 Translation = Translation,
-                StudyMethod = StudyMethod,
+                StudyMethodEnum = StudyMethod,
                 DateOfInsertion = DateOfInsertion,
                 Level = Level,
                 LastViewed = LastViewed,
-                NextViewing = NextViewing,
                 IsArchived = IsArchived
             };
 

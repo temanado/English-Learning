@@ -17,22 +17,20 @@ namespace English_Learning.Services
                     Id = Guid.NewGuid().ToString(),
                     ForeignWord = "First Word",
                     Translation = "translation of first Word",
-                    StudyMethod = StudyMethods.Pimsler,
+                    StudyMethodEnum = StudyMethodsEnum.Pimsler,
                     DateOfInsertion = DateTime.Now,
                     Level = 0,
                     LastViewed = DateTime.Now,
-                    NextViewing = Method.GetNextViewingDateTime(StudyMethods.Pimsler, DateTime.Now, DateTime.Now, 0),
                     IsArchived = false
                 },
                 new Word {
                     Id = Guid.NewGuid().ToString(),
                     ForeignWord = "second Word",
                     Translation = "translation of second word",
-                    StudyMethod = StudyMethods.Leitner,
+                    StudyMethodEnum = StudyMethodsEnum.Leitner,
                     DateOfInsertion = DateTime.Now,
                     Level = 0,
                     LastViewed = DateTime.Now,
-                    NextViewing = Method.GetNextViewingDateTime(StudyMethods.Leitner, DateTime.Now, DateTime.Now, 0),
                     IsArchived = false
                 }
             };

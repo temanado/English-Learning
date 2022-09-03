@@ -61,6 +61,33 @@ namespace English_Learning.RESX {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на App Activity End Time.
+        /// </summary>
+        public static string AppActivityEnd {
+            get {
+                return ResourceManager.GetString("AppActivityEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на App Activity Start Time.
+        /// </summary>
+        public static string AppActivityStart {
+            get {
+                return ResourceManager.GetString("AppActivityStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Cancel.
+        /// </summary>
+        public static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Pimsleur recommended repeating words 11 times. His conclusions are that repetitions are needed after 30 minutes, in the morning of the next day; after three days; later: a week, a month, three months, six months and a year. Frequent encounters with unfamiliar phrases in English are necessary to create and strengthen new neural connections.
         ///
         ///Leitner method. Words are divided into groups with repetition intervals and repeated with a certain frequency. Once a day, every other day, once a week, once every two [остаток строки не уместился]&quot;;.
@@ -167,6 +194,69 @@ namespace English_Learning.RESX {
         public static string HomePageTitile {
             get {
                 return ResourceManager.GetString("HomePageTitile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;Description&gt;.
+        /// </summary>
+        public static string LeitnerMethodDescription {
+            get {
+                return ResourceManager.GetString("LeitnerMethodDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The Leitner&apos;s Method.
+        /// </summary>
+        public static string LeitnerMethodTitle {
+            get {
+                return ResourceManager.GetString("LeitnerMethodTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;Description&gt;.
+        /// </summary>
+        public static string PimslerMethodDescription {
+            get {
+                return ResourceManager.GetString("PimslerMethodDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на The Pimsleur&apos;s Method.
+        /// </summary>
+        public static string PimslerMethodTitle {
+            get {
+                return ResourceManager.GetString("PimslerMethodTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Only Push.
+        /// </summary>
+        public static string PreferencesNotification {
+            get {
+                return ResourceManager.GetString("PreferencesNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ok.
+        /// </summary>
+        public static string WelcomeButton {
+            get {
+                return ResourceManager.GetString("WelcomeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Welcome! The first time you start, you need to configure the application..
+        /// </summary>
+        public static string WelcomeText {
+            get {
+                return ResourceManager.GetString("WelcomeText", resourceCulture);
             }
         }
     }

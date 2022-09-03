@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:English_Learning.RESX"
+             x:Class="English_Learning.Views.PreferencesPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{x:Static resources:AppResources.DetailMethod}" FontSize="Medium" />
+            <Picker ItemsSource="{Binding MethodNames, Mode=TwoWay}" SelectedItem="{Binding Method, Mode=TwoWay}"/>
+            <Button Text="{x:Static resources:AppResources.DetailAboutMethods}" Command="{Binding AboutMethodsCommand, Mode=TwoWay}"/>
+            <StackLayout Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding NotificationIsPush, Mode=TwoWay}"/>
+                <Label Text="{x:Static resources:AppResources.PreferencesNotification}" FontSize="Medium" />
+            </StackLayout>
+            <Label Text="{x:Static resources:AppResources.AppActivityStart}" FontSize="Medium" />
+            <TimePicker Time="{Binding StartTime, Mode=TwoWay}" Format="T"/>
+            <Label Text="{x:Static resources:AppResources.AppActivityEnd}" FontSize="Medium" />
+            <TimePicker Time="{Binding EndTime, Mode=TwoWay}" Format="T"/>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="{x:Static resources:AppResources.CancelButton}" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" IsVisible="False"></Button>
+                <Button Text="{x:Static resources:AppResources.DetailSave}" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

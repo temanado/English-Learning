@@ -6,12 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Item.cs" />
+    <Compile Remove="Models\Language.cs" />
     <Compile Remove="Services\DataService.cs" />
+    <Compile Remove="Services\LanguagesDataStore.cs" />
+    <Compile Remove="Services\ParametersDataStore.cs" />
+    <Compile Remove="ViewModels\LanguageViewModel.cs" />
     <Compile Remove="Views\ItemsPage - Копировать.xaml.cs" />
+    <Compile Remove="Views\LanguagePage.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="Views\ItemsPage - Копировать.xaml" />
+    <EmbeddedResource Remove="Views\LanguagePage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +37,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\PreferencesPage.xaml.cs">
+      <DependentUpon>PreferencesPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -47,10 +57,7 @@
     <EmbeddedResource Update="Views\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\LanguagePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\SettingsPage.xaml">
+    <EmbeddedResource Update="Views\PreferencesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

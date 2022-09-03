@@ -14,12 +14,7 @@
                 <Label Text="Translate" FontSize="Medium" />
                 <Entry Text="{Binding Translation, Mode=TwoWay}" FontSize="Medium" />
                 <Label Text="Method" FontSize="Medium" />
-                <Picker>
-                    <Picker.Items>
-                        <x:String>The Leitner System</x:String>
-                        <x:String>The Pimsleur Method</x:String>
-                    </Picker.Items>
-                </Picker>
+                <Picker ItemsSource="{Binding MethodNames}" SelectedItem="{Binding SelectedMethod, Mode=TwoWay}"/>
                 <Button Text="About methods" Command="{Binding AboutMethodsCommand}"/>
                 <Label Text="Information Button With Pop Up -DisplayAlert-" FontSize="Medium" />
                 <StackLayout Orientation="Horizontal">

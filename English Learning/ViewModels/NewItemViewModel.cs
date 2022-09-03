@@ -1,4 +1,5 @@
 ﻿using English_Learning.Models;
+using English_Learning.RESX;
 using English_Learning.Services;
 using English_Learning.Views;
 using System;
@@ -12,14 +13,17 @@ namespace English_Learning.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
+        private readonly IDialogService _dialogService;
+
         private string foreignWord;
         private string translation;
-        private StudyMethods studyMethod;
+        private StudyMethodsEnum studyMethod;
         private DateTime dateOfInsertion;
         private int level;
         private DateTime lastViewed;
         private DateTime nextViewing;
         private bool isArchived;
+        private string selectedMethod;
 
         public string Id { get; set; }
 
@@ -33,7 +37,7 @@ namespace English_Learning.ViewModels
             get => translation;
             set => SetProperty(ref translation, value);
         }
-        public StudyMethods StudyMethod
+        public StudyMethodsEnum StudyMethod
         {
             get => studyMethod;
             set => SetProperty(ref studyMethod, value);
@@ -63,9 +67,27 @@ namespace English_Learning.ViewModels
             get => isArchived;
             set => SetProperty(ref isArchived, value);
         }
+        public List<string> MethodNames
+        {
+            get
+            {
+                return StudyMethods.GetMethodNames();
+            }
+        }
+        public string SelectedMethod
+        {
+            get
+            {
+                return selectedMethod;
+            }
+            set
+            {
+                SetProperty(ref selectedMethod, value);
 
-        private readonly IDialogService _dialogService;
+                StudyMethod = StudyMethods.GetMethodEnumFromString(value);
 
+            }
+        }
 
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
@@ -87,7 +109,7 @@ namespace English_Learning.ViewModels
 
         private async Task AboutMethodsPopUp()
         {
-            await _dialogService.ShowAlertAsync("About methods", "The title of the alert", "Back");
+            await _dialogService.ShowAlertAsync(AppResources.DetailAboutMethodDescription, AppResources.DetailAboutMethodsTitle, AppResources.DetailAboutMethodsBackButton);
 
         }
         
@@ -120,11 +142,10 @@ namespace English_Learning.ViewModels
                 Id = Guid.NewGuid().ToString(),
                 ForeignWord = ForeignWord,
                 Translation = Translation,
-                StudyMethod = StudyMethod,
+                StudyMethodEnum = StudyMethod,
                 DateOfInsertion = DateOfInsertion,
                 Level = Level,
                 LastViewed = LastViewed,
-                NextViewing = NextViewing,
                 IsArchived = IsArchived
             };
 
@@ -135,6 +156,7 @@ namespace English_Learning.ViewModels
 
             //null ref
             await Shell.Current.GoToAsync($"{nameof(HomePage)}");
+            await Shell.Current.Navigation.PopToRootAsync();
         }
     }
 }
