@@ -144,7 +144,6 @@ namespace English_Learning.ViewModels
         private async Task AboutMethodsPopUp()
         {
             await _dialogService.ShowAlertAsync(AppResources.DetailAboutMethodDescription, AppResources.DetailAboutMethodsTitle, AppResources.DetailAboutMethodsBackButton);
-
         }
     }
 }

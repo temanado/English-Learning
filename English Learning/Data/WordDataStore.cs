@@ -1,4 +1,5 @@
 ﻿using English_Learning.Models;
+using English_Learning.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,39 +10,13 @@ using System.Xml;
 using System.Xml.Serialization;
 using Xamarin.Essentials;
 
-namespace English_Learning.Services
+namespace English_Learning.Data
 {
     public class WordDataStore : IDataStore<Word>
     {
-        private static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        private static string foldername = "EnglishLearning";
         private static string filename = "WordsXmlResource.xml";
-
-        List<Word> mockWrds = new List<Word>()
-            {
-                new Word {
-                    Id = Guid.NewGuid().ToString(),
-                    ForeignWord = "First Word",
-                    Translation = "translation of first Word",
-                    StudyMethodEnum = StudyMethodsEnum.Pimsler,
-                    DateOfInsertion = DateTime.Now,
-                    Level = 0,
-                    LastViewed = DateTime.Now,
-                    IsArchived = false
-                },
-                new Word {
-                    Id = Guid.NewGuid().ToString(),
-                    ForeignWord = "second Word",
-                    Translation = "translation of second word",
-                    StudyMethodEnum = StudyMethodsEnum.Leitner,
-                    DateOfInsertion = DateTime.Now,
-                    Level = 0,
-                    LastViewed = DateTime.Now,
-                    IsArchived = false
-                }
-            };
         private List<Word> words;
-        private List<Word> Words 
+        private List<Word> Words
         {
             get
             {
@@ -63,7 +38,7 @@ namespace English_Learning.Services
         }
         public async Task<bool> UpdateItemAsync(Word word)
         {
-            var oldWord = Words.Where((Word arg) => arg.Id == word.Id).FirstOrDefault();
+            var oldWord = Words.Where((arg) => arg.Id == word.Id).FirstOrDefault();
             Words.Remove(oldWord);
             Words.Add(word);
             SerializeWrods(Words);
@@ -75,7 +50,7 @@ namespace English_Learning.Services
         }
         public async Task<bool> DeleteItemAsync(string id)
         {
-            Word findedWord = Words.Where((Word arg) => arg.Id == id).FirstOrDefault();
+            Word findedWord = Words.Where((arg) => arg.Id == id).FirstOrDefault();
 
             if (findedWord != null)
                 Words.Remove(findedWord);
@@ -88,7 +63,6 @@ namespace English_Learning.Services
         {
             return await Task.FromResult(DeserializeWords());
         }
-
         public List<Word> DeserializeWords()
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "//" + filename;
@@ -104,48 +78,16 @@ namespace English_Learning.Services
 
             return Words;
         }
-
         public void SerializeWrods(List<Word> words)
         {
             XmlSerializer writer =
                 new XmlSerializer(typeof(List<Word>));
 
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "//" + filename;
-            FileStream file = System.IO.File.Create(path);
+            FileStream file = File.Create(path);
 
             writer.Serialize(file, words);
             file.Close();
         }
-
     }
 }
-
-
-
-
-//public WordDataStore()
-//{
-//    words = new List<Word>()
-//    {
-//        new Word {
-//            Id = Guid.NewGuid().ToString(),
-//            ForeignWord = "First Word",
-//            Translation = "translation of first Word",
-//            StudyMethodEnum = StudyMethodsEnum.Pimsler,
-//            DateOfInsertion = DateTime.Now,
-//            Level = 0,
-//            LastViewed = DateTime.Now,
-//            IsArchived = false
-//        },
-//        new Word {
-//            Id = Guid.NewGuid().ToString(),
-//            ForeignWord = "second Word",
-//            Translation = "translation of second word",
-//            StudyMethodEnum = StudyMethodsEnum.Leitner,
-//            DateOfInsertion = DateTime.Now,
-//            Level = 0,
-//            LastViewed = DateTime.Now,
-//            IsArchived = false
-//        }
-//    };
-//}

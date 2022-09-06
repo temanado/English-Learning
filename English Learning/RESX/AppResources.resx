@@ -170,6 +170,9 @@ Leitner method. Words are divided into groups with repetition intervals and repe
   <data name="LeitnerMethodTitle" xml:space="preserve">
     <value>The Leitner's Method</value>
   </data>
+  <data name="OkButton" xml:space="preserve">
+    <value>Ok</value>
+  </data>
   <data name="PimslerMethodDescription" xml:space="preserve">
     <value>&lt;Description&gt;</value>
   </data>
@@ -178,6 +181,12 @@ Leitner method. Words are divided into groups with repetition intervals and repe
   </data>
   <data name="PreferencesNotification" xml:space="preserve">
     <value>Only Push</value>
+  </data>
+  <data name="StorageAccessText" xml:space="preserve">
+    <value>Please allow access so the words are saved</value>
+  </data>
+  <data name="StorageAccessTitle" xml:space="preserve">
+    <value>Storage Access</value>
   </data>
   <data name="WelcomeButton" xml:space="preserve">
     <value>Ok</value>

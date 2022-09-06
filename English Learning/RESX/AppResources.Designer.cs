@@ -216,6 +216,15 @@ namespace English_Learning.RESX {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ok.
+        /// </summary>
+        public static string OkButton {
+            get {
+                return ResourceManager.GetString("OkButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на &lt;Description&gt;.
         /// </summary>
         public static string PimslerMethodDescription {
@@ -239,6 +248,24 @@ namespace English_Learning.RESX {
         public static string PreferencesNotification {
             get {
                 return ResourceManager.GetString("PreferencesNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Please allow access so the words are saved.
+        /// </summary>
+        public static string StorageAccessText {
+            get {
+                return ResourceManager.GetString("StorageAccessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Storage Access.
+        /// </summary>
+        public static string StorageAccessTitle {
+            get {
+                return ResourceManager.GetString("StorageAccessTitle", resourceCulture);
             }
         }
         

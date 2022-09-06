@@ -1,4 +1,5 @@
 ﻿using English_Learning.Models;
+using English_Learning.RESX;
 using English_Learning.Services;
 using English_Learning.Views;
 using System;
@@ -81,7 +82,7 @@ namespace English_Learning.ViewModels
 
             if (Permissions.ShouldShowRationale<Permissions.StorageWrite>())
             {
-                // Prompt the user with additional information as to why the permission is needed
+                await _dialogService.ShowAlertAsync(AppResources.StorageAccessText, AppResources.StorageAccessTitle, AppResources.OkButton);
             }
 
             status = await Permissions.RequestAsync<Permissions.StorageWrite>();
