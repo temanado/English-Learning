@@ -11,13 +11,12 @@ namespace English_Learning
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
+            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+            Routing.RegisterRoute(nameof(PreferencesPage), typeof(PreferencesPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
-            Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));//HomePage
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));//NewItemPage
-            Routing.RegisterRoute(nameof(ArchivePage), typeof(ArchivePage));//ArchivePage
-            Routing.RegisterRoute(nameof(ItemsPage), typeof(ItemsPage));//ItemsPage
-            Routing.RegisterRoute(nameof(PreferencesPage), typeof(PreferencesPage));//ItemsPage
+            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
+            //Routing.RegisterRoute(nameof(ArchivePage), typeof(ArchivePage));
+            //Routing.RegisterRoute(nameof(ItemsPage), typeof(ItemsPage));
         }
 
     }

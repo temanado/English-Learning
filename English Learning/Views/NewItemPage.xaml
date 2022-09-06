@@ -5,17 +5,18 @@
              Shell.PresentationMode="ModalAnimated"
              Title="New Word"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true">
+             ios:Page.UseSafeArea="true"
+             xmlns:resources="clr-namespace:English_Learning.RESX">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="3" Padding="15">
-                <Label Text="Word" FontSize="Medium" />
+                <Label Text="{x:Static resources:AppResources.DetailWord}" FontSize="Medium" />
                 <Entry Text="{Binding ForeignWord, Mode=TwoWay}" FontSize="Medium" />
-                <Label Text="Translate" FontSize="Medium" />
+                <Label Text="{x:Static resources:AppResources.DetailTranslationButton}" FontSize="Medium" />
                 <Entry Text="{Binding Translation, Mode=TwoWay}" FontSize="Medium" />
-                <Label Text="Method" FontSize="Medium" />
+                <Label Text="{x:Static resources:AppResources.DetailMethod}" FontSize="Medium" />
                 <Picker ItemsSource="{Binding MethodNames}" SelectedItem="{Binding SelectedMethod, Mode=TwoWay}"/>
-                <Button Text="About methods" Command="{Binding AboutMethodsCommand}"/>
+                <Button Text="{x:Static resources:AppResources.DetailAboutMethods}" Command="{Binding AboutMethodsCommand}"/>
                 <Label Text="Information Button With Pop Up -DisplayAlert-" FontSize="Medium" />
                 <StackLayout Orientation="Horizontal">
                     <Button Text="Clear" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>

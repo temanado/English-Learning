@@ -19,18 +19,7 @@ namespace English_Learning.Views
         public HomePage()
         {
             InitializeComponent();
-            BindingContext = _viewModel = new HomePageViewModel();
-        }
-
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            if (e.Item == null)
-                return;
-
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
-
-            //Deselect Item
-            ((ListView)sender).SelectedItem = null;
+            BindingContext = _viewModel = new HomePageViewModel(new DialogService());
         }
 
         protected override void OnAppearing()

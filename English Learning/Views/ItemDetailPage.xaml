@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="English_Learning.Views.ItemDetailPage"
+             Shell.PresentationMode="ModalAnimated"
              xmlns:resources="clr-namespace:English_Learning.RESX"
              Title="{x:Static resources:AppResources.DetailPageTitle}">
 

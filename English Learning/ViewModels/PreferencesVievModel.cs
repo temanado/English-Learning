@@ -14,11 +14,12 @@ namespace English_Learning.ViewModels
     public class PreferencesVievModel : BaseViewModel
     {
         private readonly IDialogService _dialogService;
+
         private const bool isFirstUseDefault = true;
         private readonly string methodDefault = Preferences.Get("default_method", StudyMethods.Methods[0].Title);
         private const bool notificationIsOnlyPushDefault = false;
-        private readonly DateTime startTimeAppNotificationsDefault = DateTime.MinValue;
-        private readonly DateTime endTimeAppNotificationsDefault = new DateTime(1,1,1,23,59,0);
+        private readonly DateTime startTimeAppNotificationsDefault = new DateTime(1, 1, 1, 0, 0, 0);
+        private readonly DateTime endTimeAppNotificationsDefault = new DateTime(1, 1, 1, 23, 59, 0);
 
         bool isFirstUse;
         string method;
@@ -41,12 +42,34 @@ namespace English_Learning.ViewModels
             get => notificationIsOnlyPush;
             set => SetProperty(ref notificationIsOnlyPush, value);
         }
-        public DateTime StartTimeAppNotification
+        public DateTime StartDateTimeAppNotification
         {
             get => startTime;
             set => SetProperty(ref startTime, value);
         }
-        public DateTime EndTimeAppNotification
+        public TimeSpan StartTimeAppNotification
+        {
+            get
+            {
+                return new TimeSpan(startTime.Hour, startTime.Minute, startTime.Second);
+            }
+            set
+            {
+                SetProperty(ref startTime, new DateTime(value.Ticks));
+            }
+        }
+        public TimeSpan EndTimeAppNotification
+        {
+            get
+            {
+                return new TimeSpan(endTime.Hour, endTime.Minute, endTime.Second);
+            }
+            set
+            {
+                SetProperty(ref endTime, new DateTime(value.Ticks));
+            }
+        }
+        public DateTime EndDateTimeAppNotification
         {
             get => endTime;
             set => SetProperty(ref endTime, value);
@@ -55,7 +78,6 @@ namespace English_Learning.ViewModels
         {
             get => !isFirstUse;
         }
-
         public List<string> MethodNames
         {
             get
@@ -63,7 +85,6 @@ namespace English_Learning.ViewModels
                 return StudyMethods.GetMethodNames();
             }
         }
-
         public Command AboutMethodsCommand { get; }
         public Command CancelCommand { get; }
         public Command SaveCommand { get; }
@@ -89,8 +110,8 @@ namespace English_Learning.ViewModels
                 IsFirstUse = Preferences.Get(nameof(IsFirstUse), isFirstUseDefault);
                 Method = Preferences.Get("default_method", methodDefault);//если настроек нет, то Пимслер
                 NotificationIsOnlyPush = Preferences.Get(nameof(NotificationIsOnlyPush), notificationIsOnlyPushDefault);
-                StartTimeAppNotification = Preferences.Get(nameof(StartTimeAppNotification), startTimeAppNotificationsDefault);
-                EndTimeAppNotification = Preferences.Get(nameof(EndTimeAppNotification), endTimeAppNotificationsDefault);
+                StartDateTimeAppNotification = Preferences.Get(nameof(StartDateTimeAppNotification), startTimeAppNotificationsDefault);
+                EndDateTimeAppNotification = Preferences.Get(nameof(EndDateTimeAppNotification), endTimeAppNotificationsDefault);
             }
         }
 
@@ -101,8 +122,8 @@ namespace English_Learning.ViewModels
             IsFirstUse = Preferences.Get(nameof(IsFirstUse), isFirstUseDefault);
             Method = Preferences.Get("default_method", methodDefault);
             NotificationIsOnlyPush = Preferences.Get(nameof(NotificationIsOnlyPush), notificationIsOnlyPushDefault);
-            StartTimeAppNotification = Preferences.Get(nameof(StartTimeAppNotification), startTimeAppNotificationsDefault);
-            EndTimeAppNotification = Preferences.Get(nameof(EndTimeAppNotification), endTimeAppNotificationsDefault);
+            StartDateTimeAppNotification = Preferences.Get(nameof(StartDateTimeAppNotification), startTimeAppNotificationsDefault);
+            EndDateTimeAppNotification = Preferences.Get(nameof(EndDateTimeAppNotification), endTimeAppNotificationsDefault);
         }
 
         private void Save()
@@ -110,11 +131,10 @@ namespace English_Learning.ViewModels
             Preferences.Set(nameof(IsFirstUse), false);
             Preferences.Set("default_method", Method);
             Preferences.Set(nameof(NotificationIsOnlyPush), NotificationIsOnlyPush);
-            Preferences.Set(nameof(StartTimeAppNotification), StartTimeAppNotification);
-            Preferences.Set(nameof(EndTimeAppNotification), EndTimeAppNotification);
+            Preferences.Set(nameof(StartDateTimeAppNotification), StartDateTimeAppNotification);
+            Preferences.Set(nameof(EndDateTimeAppNotification), EndDateTimeAppNotification);
 
-            Shell.Current.Navigation.PopToRootAsync();
-            Shell.Current.GoToAsync($"{nameof(HomePage)}");
+            Shell.Current.GoToAsync("..");
 
         }
         private async void CancelAsync(object obj)

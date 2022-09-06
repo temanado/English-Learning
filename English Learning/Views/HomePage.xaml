@@ -7,6 +7,11 @@
              xmlns:local="clr-namespace:English_Learning.ViewModels"  
              xmlns:model="clr-namespace:English_Learning.Models"  
              x:Name="BrowseHomePage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="Settings" Command="{Binding PreferencesCommand}" />
+    </ContentPage.ToolbarItems>
     <RefreshView x:Name="refreshView" x:DataType="local:HomePageViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="WordsListView"
                 ItemsSource="{Binding Words}"
@@ -34,32 +39,4 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </RefreshView>
-    
-    <!--<ListView x:Name="MyListView"
-            ItemsSource="{Binding Items}"
-            ItemTapped="Handle_ItemTapped"
-            CachingStrategy="RecycleElement">
-        Built in Cells
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell Text="{Binding ForeignWord}" />
-            </DataTemplate>
-        </ListView.ItemTemplate>
-
-        Custom View Cells
-        
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <StackLayout>
-            <Label Text="{Binding Text}" 
-                   Style="{DynamicResource ListItemTextStyle}" />
-            <Label Text="{Binding Detail}" 
-                   Style="{DynamicResource ListItemDetailTextStyle}"/>
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-    
-    </ListView>-->
 </ContentPage>

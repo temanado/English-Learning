@@ -30,12 +30,11 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-
-
-    <TabBar CurrentItem="{x:Reference preferencesPage}">
-        <ShellContent Title="Home" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:HomePage}" />
-        <ShellContent Title="Add word" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:NewItemPage}" />
-        <ShellContent x:Name="preferencesPage" Title="Settings" Icon="icon_config.png" ContentTemplate="{DataTemplate local:PreferencesPage}" Shell.TabBarIsVisible="False"/>
+    <TabBar>
+        <ShellContent Title="Home" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:HomePage}"/>
+        
+        <!--<ShellContent Title="Add word" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:NewItemPage}" Shell.TabBarIsVisible="False"/>-->
+        <!--<ShellContent Title="Settings" Icon="icon_config.png" ContentTemplate="{DataTemplate local:PreferencesPage}" Shell.TabBarIsVisible="False"/>-->
     </TabBar>
     <!--
         If you would like to navigate to this content you can do so by calling
