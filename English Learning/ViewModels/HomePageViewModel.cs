@@ -3,11 +3,8 @@ using English_Learning.RESX;
 using English_Learning.Services;
 using English_Learning.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -46,7 +43,9 @@ namespace English_Learning.ViewModels
         async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
-            var status = await Task.FromResult(CheckAndRequestLocationPermission());
+            await Task.FromResult(CheckAndRequestStorageWritePermission());
+            //Запрос разрешения на запуск служб после перезагрузки устройства
+            //await Task.FromResult(CheckAndRequestReceiveBootCompletedPermission());
 
             try
             {
@@ -66,7 +65,13 @@ namespace English_Learning.ViewModels
                 IsBusy = false;
             }
         }
-        public async Task<PermissionStatus> CheckAndRequestLocationPermission()
+
+        private object CheckAndRequestReceiveBootCompletedPermission()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<PermissionStatus> CheckAndRequestStorageWritePermission()
         {
             var status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
 
