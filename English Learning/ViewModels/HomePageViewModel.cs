@@ -14,6 +14,7 @@ namespace English_Learning.ViewModels
     public class HomePageViewModel : BaseViewModel
     {
         private readonly IDialogService _dialogService;
+        private readonly IRequestIgnoreBatteryOptimizationPermission _requestIgnoreBatteryOptimizationPermission;
 
         private Word _selectedWord;
         private bool isFirstUse;
@@ -24,9 +25,10 @@ namespace English_Learning.ViewModels
         public Command AddItemCommand { get; }
         public Command<Word> WordTapped { get; }
 
-        public HomePageViewModel(IDialogService dialogService)
+        public HomePageViewModel(IDialogService dialogService, IRequestIgnoreBatteryOptimizationPermission requestIgnoreBatteryOptimizationPermission)
         {
             _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+            //_requestIgnoreBatteryOptimizationPermission = requestIgnoreBatteryOptimizationPermission ?? throw new ArgumentNullException(nameof(requestIgnoreBatteryOptimizationPermission));
 
             Title = "Browse";
             Words = new ObservableCollection<Word>();
@@ -38,17 +40,24 @@ namespace English_Learning.ViewModels
 
             isFirstUse = Preferences.Get(nameof(isFirstUse), true);
 
+            if (isFirstUse)
+                OnPreferences(null);
+
         }
 
         async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
-            await Task.FromResult(CheckAndRequestStorageWritePermission());
-            //Запрос разрешения на запуск служб после перезагрузки устройства
-            //await Task.FromResult(CheckAndRequestReceiveBootCompletedPermission());
 
             try
             {
+                //запрос разрешения на запись и чтение фалов в storage
+                await Task.FromResult(CheckAndRequestStorageWritePermission());
+                //Запрос разрешения игнорировать оптимизацию батареи
+                await Task.FromResult(CheckAndRequestIgnoringBatteryOptimizationsPermission());
+                //Запрос разрешения на запуск служб после перезагрузки устройства
+                //await Task.FromResult(CheckAndRequestReceiveBootCompletedPermission());
+
                 Words.Clear();
                 var words = await WordDataStore.GetItemsAsync(true);
                 foreach (var word in words)
@@ -66,9 +75,23 @@ namespace English_Learning.ViewModels
             }
         }
 
-        private object CheckAndRequestReceiveBootCompletedPermission()
+        private Task<PermissionStatus> CheckAndRequestReceiveBootCompletedPermission()
         {
             throw new NotImplementedException();
+        }
+        private async Task<bool> CheckAndRequestIgnoringBatteryOptimizationsPermission()
+        {
+            // Ensure Required Permissions have been granted
+            IRequestIgnoreBatteryOptimizationPermission requestIgnoreBatteryOptimizationPermission = DependencyService.Get<IRequestIgnoreBatteryOptimizationPermission>();
+
+            var status = await requestIgnoreBatteryOptimizationPermission.CheckStatusAsync();
+
+            if (status != true)
+            {
+                status = await requestIgnoreBatteryOptimizationPermission.RequestAsync();
+            }
+
+            return status;
         }
 
         public async Task<PermissionStatus> CheckAndRequestStorageWritePermission()

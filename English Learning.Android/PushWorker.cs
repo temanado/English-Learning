@@ -10,7 +10,7 @@ namespace English_Learning.Droid
 {
     public class PushWorker : Worker
     {
-        INotificationManager notificationManager;
+        private readonly INotificationManager notificationManager;
 
         public const string TAG = "PushWorker";
         public PushWorker(Context context, WorkerParameters workerParams) :
@@ -36,19 +36,22 @@ namespace English_Learning.Droid
             Log.Debug(TAG, "Started.");
 
             //Perform a process here, simulated by sleeping for 5 seconds.
-
-
             //logic
-
             //push
             //title 
             //notificationManager.SendNotification(title, message);
-            notificationManager.SendNotification("notification", "my first notification");
+
+            notificationManager.SendNotification("Notification", "Notification");
 
             Log.Debug(TAG, "Completed.");
 
-            return Result.InvokeSuccess();
+            return Result.InvokeRetry();
         }
 
+        public override void OnStopped()
+        {
+            base.OnStopped();
+            Log.Debug(TAG, "Stopped.");
+        }
     }
 }

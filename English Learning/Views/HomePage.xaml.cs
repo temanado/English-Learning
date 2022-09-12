@@ -19,7 +19,7 @@ namespace English_Learning.Views
         public HomePage()
         {
             InitializeComponent();
-            BindingContext = _viewModel = new HomePageViewModel(new DialogService());
+            BindingContext = _viewModel = new HomePageViewModel(DependencyService.Get<IDialogService>(), DependencyService.Get<IRequestIgnoreBatteryOptimizationPermission>());
         }
 
         protected override void OnAppearing()

@@ -32,6 +32,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\AlarmPage.xaml.cs">
+      <DependentUpon>AlarmPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PreferencesPage.xaml.cs">
       <DependentUpon>PreferencesPage.xaml</DependentUpon>
     </Compile>

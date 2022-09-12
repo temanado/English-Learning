@@ -116,7 +116,6 @@ namespace English_Learning.ViewModels
         private async Task AboutMethodsPopUp()
         {
             await _dialogService.ShowAlertAsync(AppResources.DetailAboutMethodDescription, AppResources.DetailAboutMethodsTitle, AppResources.DetailAboutMethodsBackButton);
-
         }
 
         public async void LoadWordId(string wordId)

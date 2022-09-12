@@ -13,6 +13,7 @@ namespace English_Learning.Droid
     [Activity(Label = "English Learning", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize, LaunchMode = LaunchMode.SingleTop)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        public static MainActivity mac;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -22,26 +23,24 @@ namespace English_Learning.Droid
             LoadApplication(new App());
             CreateNotificationFromIntent(Intent);
 
-            //определяем минимальный период проверки
-            //опредеялем последний день запуска приложения (создания слов)
+            mac = this;
+
+            //находим ближайший будильник
+            //если его нет, return
+            //иначе создаем задачу на будильник.
             //
-            //создаем задачу.
-            //
 
-            var simpleWorkerRequest = new OneTimeWorkRequest.Builder(typeof(PushWorker))
-                .AddTag(PushWorker.TAG)
-                .Build();
+            PeriodicWorkRequest workerRequest = new PeriodicWorkRequest.Builder(typeof(PushWorker), new System.TimeSpan(0, 1, 0))
+                    .AddTag(PushWorker.TAG)
+                    .Build();
 
-            WorkManager.GetInstance(this).BeginUniqueWork(
-                PushWorker.TAG, ExistingWorkPolicy.Keep, simpleWorkerRequest)
-                .Enqueue();
-
+            WorkManager.GetInstance(this)
+                .EnqueueUniquePeriodicWork(PushWorker.TAG, ExistingPeriodicWorkPolicy.Replace, workerRequest);
         }
         protected override void OnNewIntent(Intent intent)
         {
             CreateNotificationFromIntent(intent);
         }
-
         void CreateNotificationFromIntent(Intent intent)
         {
             if (intent?.Extras != null)
@@ -51,8 +50,6 @@ namespace English_Learning.Droid
                 DependencyService.Get<INotificationManager>().ReceiveNotification(title, message);
             }
         }
-
-
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);

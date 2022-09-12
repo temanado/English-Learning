@@ -243,11 +243,29 @@ namespace English_Learning.RESX {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Postpone.
+        /// </summary>
+        public static string Postpone {
+            get {
+                return ResourceManager.GetString("Postpone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Only Push.
         /// </summary>
         public static string PreferencesNotification {
             get {
                 return ResourceManager.GetString("PreferencesNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Remembered.
+        /// </summary>
+        public static string Remembered {
+            get {
+                return ResourceManager.GetString("Remembered", resourceCulture);
             }
         }
         
@@ -266,6 +284,15 @@ namespace English_Learning.RESX {
         public static string StorageAccessTitle {
             get {
                 return ResourceManager.GetString("StorageAccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Time to repeat the word.
+        /// </summary>
+        public static string TimeTo_RepeatThe_Word {
+            get {
+                return ResourceManager.GetString("TimeTo RepeatThe Word", resourceCulture);
             }
         }
         

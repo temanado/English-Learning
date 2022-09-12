@@ -179,14 +179,23 @@ Leitner method. Words are divided into groups with repetition intervals and repe
   <data name="PimslerMethodTitle" xml:space="preserve">
     <value>The Pimsleur's Method</value>
   </data>
+  <data name="Postpone" xml:space="preserve">
+    <value>Postpone</value>
+  </data>
   <data name="PreferencesNotification" xml:space="preserve">
     <value>Only Push</value>
+  </data>
+  <data name="Remembered" xml:space="preserve">
+    <value>Remembered</value>
   </data>
   <data name="StorageAccessText" xml:space="preserve">
     <value>Please allow access so the words are saved</value>
   </data>
   <data name="StorageAccessTitle" xml:space="preserve">
     <value>Storage Access</value>
+  </data>
+  <data name="TimeTo RepeatThe Word" xml:space="preserve">
+    <value>Time to repeat the word</value>
   </data>
   <data name="WelcomeButton" xml:space="preserve">
     <value>Ok</value>
